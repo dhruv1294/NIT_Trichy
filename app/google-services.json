@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "496720509928",
+    "firebase_url": "https://nit-trichy-b8a6c.firebaseio.com",
+    "project_id": "nit-trichy-b8a6c",
+    "storage_bucket": "nit-trichy-b8a6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496720509928:android:89b45a586787813b47c25d",
+        "android_client_info": {
+          "package_name": "com.example.nittrichy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496720509928-kfbsqjfri6kosuik3tfcc06r0h278nqn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nittrichy",
+            "certificate_hash": "f1fa1352c2adf7566962eb571fe03b08be85dc31"
+          }
+        },
+        {
+          "client_id": "496720509928-9t7u4qm3oin3arcp14b8d0j51gfgl4dh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwJQZTuL8Uv8iotl-drXG73LF5VqdCQLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496720509928-9t7u4qm3oin3arcp14b8d0j51gfgl4dh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

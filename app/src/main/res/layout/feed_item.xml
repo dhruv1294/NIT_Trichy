@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="#edc4B3"
+    app:cardCornerRadius="8dp">
+    <RelativeLayout
+        android:id="@+id/postLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/feedPostTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post Title..."
+            android:textStyle="bold"
+            android:textSize="24sp"
+            style="@style/TextAppearance.AppCompat.Title" />
+
+        <ImageButton
+            android:id="@+id/feedMenuAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_menu_black_24dp"
+            android:background="#edc4B3"/>
+        <TextView
+            android:id="@+id/feedPostDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/feedPostTitle"
+            android:textSize="16sp"
+            android:textColor="@color/placeText"
+            android:paddingTop="8dp"
+            android:text="Date..."/>
+
+        <ImageView
+            android:id="@+id/feedPostImage"
+            android:layout_width="match_parent"
+            android:layout_height="275dp"
+            android:layout_below="@id/feedPostDate"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:paddingTop="8dp"
+
+
+            android:scaleType="fitXY"
+
+            android:src="@drawable/nittlogo" />
+
+        <TextView
+            android:id="@+id/feedPostDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:paddingTop="8dp"
+            android:textSize="16sp"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_below="@+id/feedPostLike"/>
+
+
+
+        <ImageView
+            android:id="@+id/feedPostLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_favorite_grey_24dp"
+            android:layout_below="@id/feedPostImage"
+            android:paddingTop="4dp"/>
+        <TextView
+            android:id="@+id/postLikeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20 Likes"
+            android:textSize="16sp"
+            android:textColor="@color/placeText"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_toEndOf="@+id/feedPostLike"
+            android:layout_below="@+id/feedPostImage"
+            android:paddingTop="4dp"
+            android:paddingStart="8dp"/>
+
+        <ImageView
+            android:id="@+id/postCommentButton"
+            android:transitionName="CommentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/feedPostImage"
+
+            android:layout_alignParentEnd="true"
+
+
+            android:paddingTop="4dp"
+            app:srcCompat="@drawable/ic_comment_grey_24dp" />
+
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

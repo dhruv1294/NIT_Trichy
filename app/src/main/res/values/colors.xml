@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#240046</color>
+    <color name="colorPrimaryDark">#10002b</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="buttonbg">#DDD6F3</color>
+    <color name="senderColor">#A0179E</color>
+    <color name="cardbgColor">#F6F6F6</color>
+    <color name="placeText">#774936</color>
+    <color name="yello">#ffb300</color>
+    <color name="green">#00bfaf</color>
+    <color name="pink">#ff4081</color>
+    <color name="deepPurple">#7c4dff</color>
+
+</resources>

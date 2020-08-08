@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".CommentsActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:title="COMMENTS:"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+
+
+    <ImageView
+        android:id="@+id/commentImageHeading"
+        android:transitionName="CommentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_comment_grey_24dp"
+
+        android:layout_alignParentEnd="true"
+        android:padding="10dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/commentsRecyclerView"
+        android:layout_above="@+id/commentInput"
+        android:layout_alignParentStart="true"/>
+    <EditText
+        android:id="@+id/commentInput"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/rounded_corner"
+        android:padding="10dp"
+        android:hint="write a comment here..."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendCommentButton"
+        android:layout_alignBottom="@id/commentInput"
+        android:src="@drawable/ic_send_black_24dp"
+        android:background="@drawable/rounded_corner"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="#edc4B3"
+        android:padding="10dp"/>
+
+
+
+</RelativeLayout>

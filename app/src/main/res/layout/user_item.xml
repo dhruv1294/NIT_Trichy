@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner"
+    android:padding="2dp">
+    <TextView
+        android:id="@+id/usernameChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:layout_marginLeft="10dp"
+
+        android:textColor="@android:color/black"
+        android:text="Username..."/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="20dp"
+        android:id="@+id/last_msg"
+        android:padding="5dp"
+        android:textSize="18sp"
+        android:maxLines="1"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="testing"/>
+
+</LinearLayout>

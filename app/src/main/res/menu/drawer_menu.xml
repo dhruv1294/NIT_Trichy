@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+      <item android:id="@+id/feedsNITT" android:title="Feeds" android:icon="@drawable/twotone_date_range_black_18dp" app:showAsAction="withText" ></item>
+        <item android:title="Message" android:id="@+id/messageAdmin" android:icon="@drawable/twotone_message_black_18dp" app:showAsAction="withText"></item>
+        <item android:id="@+id/placesNITT" android:title="Places" android:icon="@drawable/twotone_explore_black_18dp" app:showAsAction="withText"></item>
+        <item android:title="Notices" android:id="@+id/noticesNITT" android:icon="@drawable/twotone_insert_drive_file_black_18dp" app:showAsAction="withText"></item>
+        <item android:id="@+id/newsNITT" android:title="Press Releases/News" android:icon="@drawable/twotone_description_black_18dp" app:showAsAction="withText"></item>
+        <item android:title="Contacts" android:id="@+id/contactsNITT" android:icon="@drawable/twotone_contact_page_black_18dp" app:showAsAction="withText"></item>
+    </group>
+
+</menu>
