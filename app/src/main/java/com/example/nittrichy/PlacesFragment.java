@@ -1,6 +1,7 @@
 package com.example.nittrichy;
 
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -38,6 +39,7 @@ public class PlacesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),PlacesActivity.class);
+
                 intent.putExtra("placeType",0);
                 startActivity(intent);
 

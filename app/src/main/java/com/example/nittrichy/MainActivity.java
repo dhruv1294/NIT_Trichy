@@ -95,7 +95,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+//mAuth.addAuthStateListener(mAuthListener);
+        if(mAuth.getCurrentUser()!=null){
+            if(mAuth.getCurrentUser().getEmail().equals("dhruvkachhadia@gmail.com")){
+                Intent intent = new Intent(MainActivity.this,PostAdminActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }else{
+                Intent intent = new Intent(MainActivity.this,PostActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
 
+        }
 
     }
 

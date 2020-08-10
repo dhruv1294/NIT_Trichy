@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.nittrichy.Adapters.PDFAdapter;
 import com.example.nittrichy.Models.UploadPdf;
@@ -40,6 +41,7 @@ public class ViewNoticeFilesFragment extends Fragment {
     DatabaseReference reference;
     List<UploadPdf> uploadPdfs;
     PDFAdapter pdfAdapter;
+    ProgressBar progress;
 
 
     public ViewNoticeFilesFragment() {
@@ -53,6 +55,8 @@ public class ViewNoticeFilesFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_view_notice_files, container, false);
         myPDFListView = v.findViewById(R.id.PdfFileListView);
+        progress = v.findViewById(R.id.progress);
+        progress.setVisibility(View.VISIBLE);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
@@ -81,6 +85,7 @@ public class ViewNoticeFilesFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 uploadPdfs.clear();
+                progress.setVisibility(View.GONE);
                 for(DataSnapshot child : snapshot.getChildren()){
                     UploadPdf uploadPdf = child.getValue(UploadPdf.class);
                     uploadPdfs.add(uploadPdf);

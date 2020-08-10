@@ -10,6 +10,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
@@ -50,6 +51,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -117,6 +120,8 @@ public class AddPostActivity extends AppCompatActivity {
                     intent.setType("image/*");
                     startActivityForResult(intent,1);
                 }
+
+                //CropImage.startPickImageActivity(AddPostActivity.this);
             }
         });
         addPost.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +138,7 @@ public class AddPostActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        if (requestCode == 1) {
+       if (requestCode == 1) {
            // Uri result = data.getData();
             if (resultCode == RESULT_OK) {
                 Uri resultUri = data.getData();
@@ -145,7 +150,14 @@ public class AddPostActivity extends AppCompatActivity {
         }
 
 
+
+
+
+
     }
+
+
+
     public void startPosting(){
         progress = new ProgressDialog(AddPostActivity.this);
         progress.setMessage("Uploading...");

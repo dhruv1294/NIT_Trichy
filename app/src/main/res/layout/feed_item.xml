@@ -41,7 +41,7 @@
         <ImageView
             android:id="@+id/feedPostImage"
             android:layout_width="match_parent"
-            android:layout_height="275dp"
+            android:layout_height="400dp"
             android:layout_below="@id/feedPostDate"
             android:adjustViewBounds="true"
             android:cropToPadding="false"
@@ -51,6 +51,13 @@
             android:scaleType="fitXY"
 
             android:src="@drawable/nittlogo" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_below="@+id/feedPostLike"
+            android:layout_marginTop="2dp"/>
+
 
         <TextView
             android:id="@+id/feedPostDescription"

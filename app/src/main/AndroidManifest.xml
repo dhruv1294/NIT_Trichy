@@ -15,6 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher2_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
         <activity android:name=".ContactsActivity"
             android:parentActivityName=".PostActivity"></activity>
         <activity
@@ -50,6 +53,7 @@
         <activity android:name=".PostAdminActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".PostActivity" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,7 +61,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" />
+
 
         <service
             android:name=".Notifications.MyFirebaseIdService"
