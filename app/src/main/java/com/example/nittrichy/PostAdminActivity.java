@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.nittrichy.Adapters.FeedPostAdapter;
@@ -49,6 +50,7 @@ public class PostAdminActivity extends AppCompatActivity {
     private DatabaseReference mdatabasePosts;
     public static FeedPostAdapter recyclerAdapter;
     DrawerLayout drawerLayout;
+    ProgressBar progressBar;
 
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
@@ -103,6 +105,8 @@ public class PostAdminActivity extends AppCompatActivity {
         });
 
         recyclerView =findViewById(R.id.feedsListAdmin);
+        progressBar=findViewById(R.id.progress);
+        progressBar.setVisibility(View.VISIBLE);
         post_list = new ArrayList<>();
         recyclerAdapter =  new FeedPostAdapter(this,PostAdminActivity.this,post_list,1);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -116,6 +120,7 @@ public class PostAdminActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 post_list.removeAll(post_list);
+                progressBar.setVisibility(View.GONE);
                 for(DataSnapshot child : snapshot.getChildren()){
                    //
                     FeedPost postItem = new FeedPost(child.getValue(FeedPost.class).getTitle(),child.getValue(FeedPost.class).getDesc(),child.getValue(FeedPost.class).getImage(),child.getValue(FeedPost.class).getTime(),child.getValue(FeedPost.class).getKey());

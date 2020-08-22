@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,7 +54,10 @@ public class UserChatsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Messages:");
         recyclerView = findViewById(R.id.chatList);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        //manager.setReverseLayout(true);
+        //manager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(manager);
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
 
@@ -76,9 +80,14 @@ public class UserChatsActivity extends AppCompatActivity {
                         UsersList.add(chat.getSender());
                     }
                 }
+                Log.i("size",Integer.toString(UsersList.size()));
+                Log.i("first",UsersList.get(0));
+                Collections.reverse(UsersList);
+                Log.i("first after",UsersList.get(0));
                 Set<String> hashSet = new HashSet<String>(UsersList);
                 UsersList.clear();
                 UsersList.addAll(hashSet);
+
 
                 readChats();
             }
@@ -88,12 +97,16 @@ public class UserChatsActivity extends AppCompatActivity {
 
             }
         });
+
+
         updateToken(FirebaseInstanceId.getInstance().getToken());
 
 
 
 
+
     }
+
 
     public void updateToken(String token){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");

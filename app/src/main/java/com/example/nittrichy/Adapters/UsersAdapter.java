@@ -2,6 +2,7 @@ package com.example.nittrichy.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,9 +85,15 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot child : snapshot.getChildren()){
                     Chats chat = child.getValue(Chats.class);
-                    if(chat.getReciever().equals(fUser.getUid()) && chat.getSender().equals(userid) || chat.getReciever().equals(userid) && chat.getSender().equals(fUser.getUid())){
+                    if(chat.getReciever().equals(fUser.getUid()) && chat.getSender().equals(userid)){
                         theLastMessage = chat.getMessage();
+                        last_msg.setText(theLastMessage);
+                        last_msg.setTextColor(Color.GREEN);
 
+                    }else if(chat.getReciever().equals(userid) && chat.getSender().equals(fUser.getUid())){
+                        theLastMessage = chat.getMessage();
+                        last_msg.setText(theLastMessage);
+                        last_msg.setTextColor(Color.BLACK);
                     }
                 }
                 switch (theLastMessage){

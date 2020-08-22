@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.nittrichy.Adapters.PDFAdapter;
@@ -36,11 +37,14 @@ public class NoticePdfAdminActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
     Toolbar toolbar;
     DatabaseReference clickPDFRef;
+    ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_pdf_admin);
+        progress = findViewById(R.id.progress);
+        progress.setVisibility(View.VISIBLE);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -125,6 +129,7 @@ public class NoticePdfAdminActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 uploadPdfs.clear();
+                progress.setVisibility(View.GONE);
                 for(DataSnapshot child : snapshot.getChildren()){
                     UploadPdf uploadPdf = child.getValue(UploadPdf.class);
                     uploadPdfs.add(uploadPdf);

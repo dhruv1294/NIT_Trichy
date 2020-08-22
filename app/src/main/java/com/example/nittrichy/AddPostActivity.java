@@ -156,7 +156,17 @@ public class AddPostActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode ==1 ){
+            if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent,1);
+            }
+        }
+    }
 
     public void startPosting(){
         progress = new ProgressDialog(AddPostActivity.this);
@@ -186,7 +196,7 @@ public class AddPostActivity extends AppCompatActivity {
                                         newPost.child("Desc").setValue(description);
                                         newPost.child("image").setValue(downloadUrl);
                                         newPost.child("Time").setValue(saveCurrentDate);
-
+                                       
 
 
 

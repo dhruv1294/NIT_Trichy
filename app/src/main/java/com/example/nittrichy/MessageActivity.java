@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -185,6 +186,17 @@ public class MessageActivity extends AppCompatActivity {
         userMessageInput = findViewById(R.id.inputMessage);
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
     private void SendMessage(String sender, final String reciever, String mess){
         DatabaseReference chats = FirebaseDatabase.getInstance().getReference();

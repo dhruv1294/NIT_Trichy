@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,15 +71,15 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
     public void onBindViewHolder(@NonNull final FeedPostAdapter.ViewHolder holder, int position) {
         final String postKey = feedPosts.get(position).getKey();
         holder.menuButton.setVisibility(View.INVISIBLE);
+
         holder.postTitle.setText(feedPosts.get(position).getTitle());
-       // Date date = new Date(feedPosts.get(position).getTime());
-       // String dateTimePattern = "MMM dd, yyyy ";
-       // String dateText = new SimpleDateFormat(dateTimePattern).format(date);
+        holder.postCard.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_scale));
+
         holder.postTime.setText(feedPosts.get(position).getTime());
         holder.postDescription.setText(feedPosts.get(position).getDesc());
         Picasso.with(context).load(feedPosts.get(position).getImage()).into(holder.postImage);
         setLikeButtonStatus(postKey,holder);
-        //holder.postLikeCount.setText(Integer.toString(likeCount)+" likes");
+
         holder.postLikeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,6 +167,7 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
         TextView postTitle,postDescription,postTime,postLikeCount;
         ImageView postImage,postLikeImage,commentButton;
         ImageButton menuButton;
+        CardView postCard;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -175,6 +179,7 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
             postLikeCount = itemView.findViewById(R.id.postLikeCount);
             commentButton = itemView.findViewById(R.id.postCommentButton);
             menuButton = itemView.findViewById(R.id.feedMenuAdmin);
+            postCard = itemView.findViewById(R.id.postcard);
 
         }
     }

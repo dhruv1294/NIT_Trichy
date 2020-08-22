@@ -37,7 +37,7 @@
             android:parentActivityName=".PostAdminActivity" />
         <activity
             android:name=".MessageActivity"
-            android:parentActivityName=".PostActivity" />
+            />
         <activity
             android:name=".ResetPasswordActivity"
             android:parentActivityName=".MainActivity" />
