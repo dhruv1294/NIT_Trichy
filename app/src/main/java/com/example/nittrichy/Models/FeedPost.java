@@ -2,17 +2,43 @@ package com.example.nittrichy.Models;
 
 public class FeedPost {
     String Title,Desc,image,Key;
-    String Time;
+    String Time,deadlineDate,deadlineTime;
     public FeedPost(){
 
     }
 
+    public FeedPost(String title, String desc, String image, String time,String Key,String deadlineDate,String deadlineTime) {
+        Title = title;
+        Desc = desc;
+        this.image = image;
+        this.Key = Key;
+        Time = time;
+        this.deadlineDate=deadlineDate;
+        this.deadlineTime = deadlineTime;
+    }
     public FeedPost(String title, String desc, String image, String time,String Key) {
         Title = title;
         Desc = desc;
         this.image = image;
         this.Key = Key;
         Time = time;
+
+    }
+
+    public String getDeadlineDate() {
+        return deadlineDate;
+    }
+
+    public void setDeadlineDate(String deadlineDate) {
+        this.deadlineDate = deadlineDate;
+    }
+
+    public String getDeadlineTime() {
+        return deadlineTime;
+    }
+
+    public void setDeadlineTime(String deadlineTime) {
+        this.deadlineTime = deadlineTime;
     }
 
     public String getTitle() {

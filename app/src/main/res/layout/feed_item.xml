@@ -42,7 +42,7 @@
         <ImageView
             android:id="@+id/feedPostImage"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="350dp"
             android:layout_below="@id/feedPostDate"
             android:adjustViewBounds="true"
             android:cropToPadding="false"
@@ -91,6 +91,16 @@
             android:layout_below="@+id/feedPostImage"
             android:paddingTop="4dp"
             android:paddingStart="8dp"/>
+        <ImageView
+            android:id="@+id/bookmarkPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_bookmark_border_black_24dp"
+            android:layout_below="@id/feedPostImage"
+            android:layout_toEndOf="@id/postLikeCount"
+            android:paddingLeft="10dp"
+            android:paddingTop="4dp"/>
+
 
         <ImageView
             android:id="@+id/postCommentButton"

@@ -123,7 +123,7 @@ public class PostAdminActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 for(DataSnapshot child : snapshot.getChildren()){
                    //
-                    FeedPost postItem = new FeedPost(child.getValue(FeedPost.class).getTitle(),child.getValue(FeedPost.class).getDesc(),child.getValue(FeedPost.class).getImage(),child.getValue(FeedPost.class).getTime(),child.getValue(FeedPost.class).getKey());
+                    FeedPost postItem = new FeedPost(child.getValue(FeedPost.class).getTitle(),child.getValue(FeedPost.class).getDesc(),child.getValue(FeedPost.class).getImage(),child.getValue(FeedPost.class).getTime(),child.getValue(FeedPost.class).getKey(),child.getValue(FeedPost.class).getDeadlineDate(),child.getValue(FeedPost.class).getDeadlineTime());
                     //FeedPost postItem = child.getValue(FeedPost.class);
                     post_list.add(postItem);
                     recyclerAdapter.notifyDataSetChanged();

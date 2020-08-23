@@ -67,7 +67,7 @@ import retrofit2.Response;
 public class AddPostActivity extends AppCompatActivity {
 
     ImageView postImage;
-    EditText postTitle,postDescrption;
+    EditText postTitle,postDescrption,deadlineDate,deadlineTime;
     Button addPost;
     Uri mainImageUri;
     private StorageReference mStorage;
@@ -93,6 +93,8 @@ public class AddPostActivity extends AppCompatActivity {
         postImage = findViewById(R.id.postImage);
         postTitle = findViewById(R.id.postTitleText);
         postDescrption = findViewById(R.id.postDescriptionText);
+        deadlineDate = findViewById(R.id.deadLineDate);
+        deadlineTime = findViewById(R.id.deadLinetime);
         mDatabasePost = FirebaseDatabase.getInstance().getReference().child("Posts");
         addPost = findViewById(R.id.addPostButton);
         notificationApi= Client.getClient("https://fcm.googleapis.com/").create(NotificationApi.class);
@@ -177,6 +179,8 @@ public class AddPostActivity extends AppCompatActivity {
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, YYYY");
         final String saveCurrentDate = currentDate.format(calFordDate.getTime());
         final String description = postDescrption.getText().toString();
+        final String deadlineDateString = deadlineDate.getText().toString();
+        final String deadlineTimeString = deadlineTime.getText().toString();
         if(!TextUtils.isEmpty(title)&&!TextUtils.isEmpty(description)&& mainImageUri!=null){
             final StorageReference filePath = mStorage.child("Post_Images").child(mainImageUri.getLastPathSegment());
             filePath.putFile(mainImageUri)
@@ -196,6 +200,8 @@ public class AddPostActivity extends AppCompatActivity {
                                         newPost.child("Desc").setValue(description);
                                         newPost.child("image").setValue(downloadUrl);
                                         newPost.child("Time").setValue(saveCurrentDate);
+                                        newPost.child("deadlineDate").setValue(deadlineDateString);
+                                        newPost.child("deadlineTime").setValue(deadlineTimeString);
                                        
 
 

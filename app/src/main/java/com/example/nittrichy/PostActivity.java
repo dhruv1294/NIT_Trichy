@@ -7,6 +7,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -20,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nittrichy.Notifications.AlertReciever;
 import com.example.nittrichy.Notifications.Token;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +39,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.Calendar;
+
 public class PostActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
@@ -40,6 +48,7 @@ public class PostActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     TextView welcomeUser;
+    public static final String CHANNEL_ID = "exampleServiceChannel";
 
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
@@ -69,6 +78,7 @@ public class PostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        createNotificationChannel();
 
         switch (previousState){
             case 0:
@@ -242,5 +252,19 @@ public class PostActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,new ContactsFragment()).commit();
         setTitle("Contacts:");
     }
+    private void createNotificationChannel(){
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel serviceChannel = new NotificationChannel(
+                        CHANNEL_ID,
+                        "Example Service Channel",
+                        NotificationManager.IMPORTANCE_DEFAULT
+                );
+                NotificationManager manager = getSystemService(NotificationManager.class);
+                manager.createNotificationChannel(serviceChannel);
+            }
+
+    }
+
 
 }

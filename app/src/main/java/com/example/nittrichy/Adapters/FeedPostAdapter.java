@@ -1,8 +1,11 @@
 package com.example.nittrichy.Adapters;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nittrichy.CommentsActivity;
 import com.example.nittrichy.EditPostActivity;
 import com.example.nittrichy.Models.FeedPost;
+import com.example.nittrichy.Notifications.AlarmService;
+import com.example.nittrichy.Notifications.AlertReciever;
+import com.example.nittrichy.PostActivity;
 import com.example.nittrichy.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,9 +38,11 @@ import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.nittrichy.HomePostFragment.bookMark;
 import static com.example.nittrichy.HomePostFragment.likeChecker;
 
 
@@ -47,6 +55,8 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
     int admin;
     String currentUserId;
     public static DatabaseReference mdatabaseLikes;
+    public static DatabaseReference mDatabaseBookmark;
+    PostActivity postActivity;
 
     public FeedPostAdapter(Context context, Activity a, ArrayList<FeedPost> feedPosts,int admin){
      this.context = context;
@@ -64,11 +74,12 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
             currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         }
         mdatabaseLikes = FirebaseDatabase.getInstance().getReference().child("Likes");
+        mDatabaseBookmark = FirebaseDatabase.getInstance().getReference().child("Bookmarks");
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final FeedPostAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final FeedPostAdapter.ViewHolder holder, final int position) {
         final String postKey = feedPosts.get(position).getKey();
         holder.menuButton.setVisibility(View.INVISIBLE);
 
@@ -79,6 +90,7 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
         holder.postDescription.setText(feedPosts.get(position).getDesc());
         Picasso.with(context).load(feedPosts.get(position).getImage()).into(holder.postImage);
         setLikeButtonStatus(postKey,holder);
+        setBookmarkButtonStatus(postKey,holder);
 
         holder.postLikeImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +128,66 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
                 commentsIntent.putExtra("PostKey",postKey);
                 ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(a,v.findViewById(R.id.postCommentButton),"CommentButton");
                 context.startActivity(commentsIntent,optionsCompat.toBundle());
+            }
+        });
+
+        holder.bookmarkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bookMark = true;
+                mDatabaseBookmark.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(bookMark.equals(true)){
+                            if(currentUserId!=null) {
+                                if (snapshot.child(postKey).hasChild(currentUserId)) {
+                                    mDatabaseBookmark.child(postKey).child(currentUserId).removeValue();
+                                    Intent intent = new Intent(context, AlarmService.class);
+
+                                    context.stopService(intent);
+
+                                    bookMark = false;
+                                } else {
+                                    mDatabaseBookmark.child(postKey).child(currentUserId).setValue(true);
+                                    String date = feedPosts.get(position).getDeadlineDate();
+                                    String time = feedPosts.get(position).getDeadlineTime();
+                                    if(date.equals("nil") || time.equals("nil") ){
+                                        Log.i("no","deadline");
+                                    }else {
+                                        Log.i("date and Time",date + " " + time);
+
+                                        String[] date1 = date.split("/");
+                                        String[] time1 = time.split(":");
+                                        Calendar c = Calendar.getInstance();
+                                        c.set(Integer.parseInt(date1[2])-10, Integer.parseInt(date1[1]), Integer.parseInt(date1[0]), Integer.parseInt(time1[0]), Integer.parseInt(time1[1]));
+                                        c.set(Calendar.YEAR,Integer.parseInt(date1[2]));
+                                        c.set(Calendar.MONTH,Integer.parseInt(date1[1]));
+                                        c.set(Calendar.DAY_OF_MONTH,Integer.parseInt(date1[0])-1);
+                                        c.set(Calendar.HOUR_OF_DAY,Integer.parseInt(time1[0]));
+                                        c.set(Calendar.MINUTE,Integer.parseInt(time1[1]));
+                                        long millis = c.getTimeInMillis();
+                                        //postActivity.setNotification(c);
+                                        Intent intent = new Intent(context, AlarmService.class);
+                                        intent.putExtra("millis",millis);
+                                        intent.putExtra("date",date1);
+                                        intent.putExtra("time",time1);
+                                        intent.putExtra("title",feedPosts.get(position).getTitle());
+                                        ContextCompat.startForegroundService(context,intent);
+                                    }
+
+                                    bookMark = false;
+                                }
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
 
@@ -157,6 +229,25 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
             }
         });
     }
+    public void setBookmarkButtonStatus(final String postkey,@NonNull final FeedPostAdapter.ViewHolder holder){
+        mDatabaseBookmark.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(currentUserId!=null){
+                    if(snapshot.child(postkey).hasChild(currentUserId)){
+                        holder.bookmarkButton.setImageResource(R.drawable.ic_bookmark_black_24dp);
+                    }else{
+                        holder.bookmarkButton.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {
@@ -165,7 +256,7 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView postTitle,postDescription,postTime,postLikeCount;
-        ImageView postImage,postLikeImage,commentButton;
+        ImageView postImage,postLikeImage,commentButton,bookmarkButton;
         ImageButton menuButton;
         CardView postCard;
 
@@ -180,6 +271,7 @@ public class FeedPostAdapter extends RecyclerView.Adapter<FeedPostAdapter.ViewHo
             commentButton = itemView.findViewById(R.id.postCommentButton);
             menuButton = itemView.findViewById(R.id.feedMenuAdmin);
             postCard = itemView.findViewById(R.id.postcard);
+            bookmarkButton = itemView.findViewById(R.id.bookmarkPost);
 
         }
     }

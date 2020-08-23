@@ -21,19 +21,19 @@
         android:id="@+id/postImage"
         android:layout_width="match_parent"
         android:layout_height="275dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="0dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:srcCompat="@drawable/add_btn" />
 
     <EditText
         android:id="@+id/postTitleText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Title..."
         android:inputType="textPersonName"
@@ -47,7 +47,7 @@
         android:id="@+id/postDescriptionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Description..."
@@ -56,12 +56,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postTitleText" />
 
+    <EditText
+        android:id="@+id/deadLineDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="deadline date (dd/mm/yyyy) type nil if no date"
+        android:inputType="date"
+        app:layout_constraintTop_toBottomOf="@+id/postDescriptionText" />
+    <EditText
+        android:id="@+id/deadLinetime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="dealine time (hh:mm)(24hr) type nil if no time"
+        android:inputType="time"
+        app:layout_constraintTop_toBottomOf="@+id/deadLineDate" />
+
     <Button
         android:id="@+id/addPostButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="163dp"
         android:padding="10dp"
         android:text="ADD POST!"
@@ -70,5 +87,5 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postDescriptionText" />
+        app:layout_constraintTop_toBottomOf="@+id/deadLinetime" />
 </androidx.constraintlayout.widget.ConstraintLayout>
